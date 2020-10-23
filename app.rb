@@ -7,8 +7,14 @@ class App < Sinatra::Base
   end
 
   post '/' do
-    text_from_user = params[:user_text]
-
+    # text_from_user = params[:user_text]
+    # @analyzed_text = TextAnalyzer.new(text_from_user)
+    @analyzed_text = TextAnalyzer.new(params[:user_text])
+    @counter = @analyzed_text.count_of_words
+    @vowels =  @analyzed_text.count_of_vowels
+    @consonants = @analyzed_text.count_of_consonants
+    @most = @analyzed_text.most_used_letter
+    @most_count = @most.count
     erb :results
   end
 end
